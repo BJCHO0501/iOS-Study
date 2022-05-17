@@ -33,7 +33,7 @@ class ViewController: UIViewController {
             upDownLabel.text = "Down"
         }
         else{
-            upDownLabel.text = "축"
+            upDownLabel.text = "축하"
         }
     }
     

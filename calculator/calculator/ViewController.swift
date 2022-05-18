@@ -31,7 +31,6 @@ class ViewController: UIViewController {
     var calculatNumber: Double? = nil
     var nowOption: String? = nil
     var resetOutputLabel = false
-    var dotBool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +43,6 @@ class ViewController: UIViewController {
         optionButtonColorReset()
         nowOption = nil
         resetOutputLabel = false
-        dotBool = false
     }
     
     @IBAction func numberButtonDidTap(sender: UIButton){
@@ -64,15 +62,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction func dotButtonDidTap(_ Button: UIButton) {
-        acButton.setTitle("C", for: .normal)
-        if dotBool == false {
+        let outputLabelText = outputLabel!.text!
+        if outputLabelText.contains(".") == false {
+            acButton.setTitle("C", for: .normal)
             if resetOutputLabel == true {
                 outputLabel.text = "0"
                 resetOutputLabel = false
             }
             let outputLabelText = outputLabel!.text!
             outputLabel.text = outputLabelText + "."
-            dotBool = true
         }
     }
     
@@ -147,6 +145,21 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func backSpace() {
+        if resetOutputLabel == false {
+            var labelValue = String(outputLabel.text!)
+            if labelValue != "0" {
+                labelValue = String(labelValue.dropLast())
+                if labelValue == "" {
+                    outputLabel.text = "0"
+                }
+                else {
+                    outputLabel.text = labelValue
+                }
+            }
+        }
+    }
+    
     func calculat(_ option: String?) {
         if let labelValue = Double(outputLabel.text!) {
             if option != nil && calculatNumber != nil {
@@ -154,7 +167,6 @@ class ViewController: UIViewController {
                 case "+":
                     if intOrNot(labelValue + calculatNumber!) {
                         outputLabel.text = "\(Int(labelValue + calculatNumber!))"
-                        dotBool = false
                     }
                     else {
                         outputLabel.text = "\(labelValue + calculatNumber!)"
@@ -163,7 +175,6 @@ class ViewController: UIViewController {
                 case "-":
                     if intOrNot(calculatNumber! - labelValue) {
                         outputLabel.text = "\(Int(calculatNumber! - labelValue))"
-                        dotBool = false
                     }
                     else {
                         outputLabel.text = "\(calculatNumber! - labelValue)"
@@ -173,7 +184,6 @@ class ViewController: UIViewController {
                     if labelValue != 0.0 {
                         if intOrNot(calculatNumber! / labelValue) {
                             outputLabel.text = "\(Int(calculatNumber! / labelValue))"
-                            dotBool = false
                         }
                         else {
                             outputLabel.text = "\(calculatNumber! / labelValue)"
@@ -181,13 +191,11 @@ class ViewController: UIViewController {
                     }
                     else {
                         outputLabel.text = "오류"
-                        resetOutputLabel = true
                     }
                     break;
                 case "X":
                     if intOrNot(labelValue * calculatNumber!) {
                         outputLabel.text = "\(Int(labelValue * calculatNumber!))"
-                        dotBool = false
                     }
                     else {
                         outputLabel.text = "\(labelValue * calculatNumber!)"

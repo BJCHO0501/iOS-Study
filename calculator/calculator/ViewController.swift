@@ -61,19 +61,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func dotButtonDidTap(_ Button: UIButton) {
-        let outputLabelText = outputLabel!.text!
-        if outputLabelText.contains(".") == false {
-            acButton.setTitle("C", for: .normal)
-            if resetOutputLabel == true {
-                outputLabel.text = "0"
-                resetOutputLabel = false
-            }
-            let outputLabelText = outputLabel!.text!
-            outputLabel.text = outputLabelText + "."
-        }
-    }
-    
+    //MARK: - 기호버튼 함수
     @IBAction func optionButtonDidTap(_ sender: UIButton) {
         acButton.setTitle("C", for: .normal)
         let inputoption = sender.currentTitle!
@@ -143,6 +131,39 @@ class ViewController: UIViewController {
                 return
             }
         }
+        else if inputoption == "+/-" {
+            var labelValue = Double(outputLabel!.text!)!
+            labelValue *= -1
+            if intOrNot(labelValue) {
+                outputLabel.text = "\(Int(labelValue))"
+            }
+            else {
+                outputLabel.text = "\(labelValue)"
+            }
+        }
+        else if inputoption == "%" {
+            var labelValue = Double(outputLabel!.text!)!
+            labelValue /= 100
+            if intOrNot(labelValue) {
+                outputLabel.text = "\(Int(labelValue))"
+            }
+            else {
+                outputLabel.text = "\(labelValue)"
+            }
+        }
+    }
+    
+    @IBAction func dotButtonDidTap(_ Button: UIButton) {
+        let outputLabelText = outputLabel!.text!
+        if outputLabelText.contains(".") == false {
+            acButton.setTitle("C", for: .normal)
+            if resetOutputLabel == true {
+                outputLabel.text = "0"
+                resetOutputLabel = false
+            }
+            let outputLabelText = outputLabel!.text!
+            outputLabel.text = outputLabelText + "."
+        }
     }
     
     @IBAction func backSpace() {
@@ -160,6 +181,7 @@ class ViewController: UIViewController {
         }
     }
     
+    //MARK: - 계산 함수
     func calculat(_ option: String?) {
         if let labelValue = Double(outputLabel.text!) {
             if option != nil && calculatNumber != nil {
@@ -214,9 +236,15 @@ class ViewController: UIViewController {
         
     }
     
+    //MARK: - 정수판별 함수
     func intOrNot(_ number: Double) -> Bool {
-        let ceilIntNum = Int(ceil(number))
-        if ceilIntNum == Int(number) {
+        var inNum = number
+        if inNum < 0 {
+            inNum *= -1
+        }
+        let ceilIntNum = Int(ceil(inNum))
+        print("\(ceilIntNum), \(inNum)")
+        if ceilIntNum == Int(inNum) {
             return true
         }
         else {
@@ -224,6 +252,7 @@ class ViewController: UIViewController {
         }
     }
     
+    //MARK: - 버튼색 변경 함수
     func optionAction(_ sender: UIButton) {
         calculatNumber = Double(outputLabel!.text!)
         resetOutputLabel = true

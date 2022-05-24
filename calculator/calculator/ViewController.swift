@@ -132,23 +132,25 @@ class ViewController: UIViewController {
             }
         }
         else if inputoption == "+/-" {
-            var labelValue = Double(outputLabel!.text!)!
-            labelValue *= -1
-            if intOrNot(labelValue) {
-                outputLabel.text = "\(Int(labelValue))"
-            }
-            else {
-                outputLabel.text = "\(labelValue)"
+            if var labelValue = Double(outputLabel!.text!) {
+                labelValue *= -1
+                if intOrNot(labelValue) {
+                    outputLabel.text = "\(Int(labelValue))"
+                }
+                else {
+                    outputLabel.text = "\(labelValue)"
+                }
             }
         }
         else if inputoption == "%" {
-            var labelValue = Double(outputLabel!.text!)!
-            labelValue /= 100
-            if intOrNot(labelValue) {
-                outputLabel.text = "\(Int(labelValue))"
-            }
-            else {
-                outputLabel.text = "\(labelValue)"
+            if var labelValue = Double(outputLabel!.text!) {
+                labelValue /= 100
+                if intOrNot(labelValue) {
+                    outputLabel.text = "\(Int(labelValue))"
+                }
+                else {
+                    outputLabel.text = "\(labelValue)"
+                }
             }
         }
     }
@@ -233,7 +235,6 @@ class ViewController: UIViewController {
             outputLabel.text = "오류"
             resetOutputLabel = true
         }
-        
     }
     
     //MARK: - 정수판별 함수
@@ -243,7 +244,6 @@ class ViewController: UIViewController {
             inNum *= -1
         }
         let ceilIntNum = Int(ceil(inNum))
-        print("\(ceilIntNum), \(inNum)")
         if ceilIntNum == Int(inNum) {
             return true
         }

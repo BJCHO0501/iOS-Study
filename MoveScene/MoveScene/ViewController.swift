@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     
     @IBAction func moveModalView(_ button: UIButton) {
         let modalVC = self.storyboard?.instantiateViewController(withIdentifier: "modalView")
-        modalVC?.modalPresentationStyle = .fullScreen
+        modalVC?.modalPresentationStyle = .pageSheet
         self.present(modalVC!, animated: true)
     }
     

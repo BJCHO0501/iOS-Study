@@ -22,7 +22,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Segue"/>
                                 <connections>
-                                    <segue destination="LK4-wT-tAw" kind="show" id="e43-LC-pSH"/>
+                                    <segue destination="LK4-wT-tAw" kind="show" id="f2z-q7-a2A"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Sg-4z-eJc">

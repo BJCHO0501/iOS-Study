@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  TODOList
-//
-//  Created by 조병진 on 2022/05/24.
-//
-
 import UIKit
 
 var todoList = [TodoList]()
@@ -17,10 +10,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         tableViewController.delegate = self
         tableViewController.dataSource = self
+        getData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         tableViewController.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        saveData()
     }
     
     //MARK: - 셀 개수
@@ -45,6 +43,31 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         else if editingStyle == .insert {
             
+        }
+    }
+    
+    private func saveData() {
+        let data = todoList.map {
+            [
+                "title": $0.TodoTitle,
+                "subtitle": $0.TodoSubtitle
+            ]
+        }
+        
+        UserDefaults.standard.set(data, forKey: "item")
+        UserDefaults.standard.synchronize()
+    }
+    
+    func getData() {
+        guard let data = UserDefaults.standard.object(forKey: "item") as? [[String: AnyObject]] else {
+            return
+        }
+            
+        todoList = data.map {
+            let title = $0["title"] as? String
+            let subtitle = $0["subtitle"] as? String
+            
+            return TodoList(todoTitle: title!, todoSubtitle: subtitle!)
         }
     }
 }

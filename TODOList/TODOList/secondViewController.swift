@@ -1,10 +1,3 @@
-//
-//  secondViewController.swift
-//  TODOList
-//
-//  Created by 조병진 on 2022/05/24.
-//
-
 import UIKit
 
 class secondViewController: UIViewController {
@@ -19,12 +12,12 @@ class secondViewController: UIViewController {
     @IBAction func doneBarbuttonitemDidTap(_ Button: UIBarButtonItem) {
         let title = titleTextfield.text!
         let contant = contantTextView.text!
-        
         let item: TodoList = TodoList(todoTitle: title, todoSubtitle: contant)
         todoList.append(item)
-        
+        print(todoList)
         self.navigationController?.popViewController(animated: true)
     }
+    
     
     @IBAction func cancelBarbuttonitemDidTap(_ Button: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)

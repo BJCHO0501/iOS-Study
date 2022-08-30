@@ -19,7 +19,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-    
     func searchRest(matjip: String) {
         httpClient.get(
             url: AuthAPI.search.path(),

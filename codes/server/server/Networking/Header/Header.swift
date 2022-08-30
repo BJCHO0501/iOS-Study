@@ -26,6 +26,7 @@ struct Token {
             _refrsehToken = UserDefaults.standard.string(forKey: "refresToken")
         }
     }
+    
     static func tokenRemove() {
         accesstoken = nil
         refreshToken = nil

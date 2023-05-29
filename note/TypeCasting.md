@@ -115,8 +115,8 @@ optionalCasted = park as? Student //nil
 ``` swift
 var optionalCasted: Student?
 
-optionalCasted = cookie as? UniversityStudent
-optionalCasted = park as? Student //런타임 오류
+optionalCasted = cookie as! UniversityStudent
+optionalCasted = park as! Student //런타임 오류
 ```
 
 
